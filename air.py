@@ -1,14 +1,8 @@
 import cv2
 import numpy as np
-
-#### global ####
 x,y,k = 200,200,-1
 
 cap = cv2.VideoCapture(0)
-
-################################################
-
-############# func def #########################
 def take_inp(event, x1, y1, flag, param):
     global x, y, k
     if event == cv2.EVENT_LBUTTONDOWN:
@@ -18,8 +12,6 @@ def take_inp(event, x1, y1, flag, param):
 
 cv2.namedWindow("enter_point")
 cv2.setMouseCallback("enter_point", take_inp)
-
-##### taking input point ######################
 while True:
      
     _, inp_img = cap.read()
@@ -31,15 +23,8 @@ while True:
     if k == 1 or cv2.waitKey(30) == 27:
         cv2.destroyAllWindows()
         break
-
-##############################################
 stp = 0
-########## opical flow starts here ###########
-
-
 old_pts = np.array([[x, y]], dtype=np.float32).reshape(-1,1,2)
-
-
 mask = np.zeros_like(inp_img)
 
 while True:
@@ -82,8 +67,5 @@ while True:
     
     if cv2.waitKey(1) & 0xff == 27:
         break
-    
-#### thank you for this vi
-
 cv2.destroyAllWindows()
 cap.release()
